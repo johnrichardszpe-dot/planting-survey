@@ -1,0 +1,35 @@
+const P = require('./logic.js'); const assert = require('assert');
+const near = (a, b, tol, msg) => assert(Math.abs(a - b) <= tol, `${msg}: ${a} vs ${b}`);
+near(P.plotArea(5.64), 99.93, 0.01, '5.64 m radius ~ 100 m2');
+near(P.plotArea(7.98), 200.06, 0.01, '7.98 m radius ~ 200 m2');
+near(P.plotArea(2), 12.566, 0.001, '2 m radius');
+near(P.radiusForArea(100), 5.6419, 0.0001, 'radius for 100 m2');
+near(P.radiusForArea(200), 7.9788, 0.0001, 'radius for 200 m2');
+near(P.survivalPct(8, 1, 1), 80, 1e-9, 'survival with missing');
+near(P.surviveFound(8, 2), 80, 1e-9, 'survival found');
+near(P.surviveFound(8, 1), 88.888, 0.001, 'survival ignoring missing');
+assert.strictEqual(P.survivalPct(0, 0, 0), null, 'no trees');
+near(P.survivalPct(0, 5, 0), 0, 1e-9, 'all dead');
+near(P.stemsPerHa(10, P.radiusForArea(100)), 1000, 1e-9, '10 trees in 100 m2 = 1000/ha');
+near(P.stemsPerHa(25, P.radiusForArea(200)), 1250, 1e-9, '25 in 200 m2');
+near(P.stemsPerHa(10, 5.64), 1000.7, 0.1, '10 trees in 5.64 m plot');
+near(P.mean([10, 20, null, 30]), 20, 1e-9, 'mean skips blanks'); assert.strictEqual(P.mean([]), null);
+near(P.distanceM(-34.25, 116.15, -34.25, 116.15), 0, 1e-9, 'zero dist');
+near(P.distanceM(0, 0, 0.001, 0), 111.195, 0.01, '0.001 deg lat');
+near(P.bearingDeg(0, 0, 1, 0), 0, 1e-9, 'north'); near(P.bearingDeg(0, 0, 0, 1), 90, 1e-9, 'east');
+near(P.bearingDeg(0, 0, -1, 0), 180, 1e-9, 'south');
+assert.strictEqual(P.compassWord(350), 'N'); assert.strictEqual(P.compassWord(135), 'SE');
+near(P.cameraHeading(0, 90, 0), 0, 1e-9, 'upright north'); near(P.cameraHeading(90, 90, 0), 270, 1e-9, 'upright west');
+near(P.angleDiff(10, 350), 20, 1e-9, 'wrap');
+const v = { date: '2026-10-21T04:00:00.000Z', notes: 'dry, "windy"',
+  counts: { 'Eucalyptus': { alive: 6, dead: 1, missing: 1 }, 'Acacia': { alive: 2, dead: 0, missing: 0 } },
+  trees: [{ species: 'Acacia', h: 40, d: 6, dAt: 'base', health: 'good' }, { species: 'Acacia', h: 60, health: 'stressed' }] };
+const T = P.visitTotals(v, P.radiusForArea(100));
+assert.strictEqual(T.alive, 8); assert.strictEqual(T.total, 10); near(T.survival, 80, 1e-9, 'visit survival');
+near(T.stemsHa, 800, 1e-9, 'visit stems/ha'); near(T.meanH, 50, 1e-9, 'mean height'); assert.strictEqual(T.stressed, 1);
+near(T.species.Eucalyptus.survival, 75, 1e-9, 'species survival');
+const db = { sites: [{ id: 's', name: 'Creek, North' }], plots: [{ id: 'p', siteId: 's', name: 'P1', radius: 5.64, lat: -34.1, lon: 116.1, acc: 6 }], visits: [Object.assign({ plotId: 'p' }, v)] };
+const csv = P.toCSV(db), lines = csv.trim().split('\r\n');
+assert.strictEqual(lines.length, 1 + 6 + 2, 'csv rows'); assert(lines[1].startsWith('count,"Creek, North",P1,-34.1,116.1,6,5.64,99.93,2026-10-21T04:00:00.000Z'), lines[1]);
+assert(csv.includes('"dry, ""windy"""'), 'csv quoting'); assert(lines[7].includes(',6,base,good,'), lines[7]);
+console.log('All maths tests passed');
