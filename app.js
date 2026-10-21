@@ -459,7 +459,7 @@
 
   function viewAbout() {
     main.innerHTML = top(t('about'), '') + '<div class="card">' + t('aboutText') + '</div><div class="card"><h3>' + t('howTo') + '</h3>' + t('howToText') +
-      '<p class="small">' + t('method') + '</p></div><p class="small center">' + t('version', { v: VERSION }) + ' · <a href="https://github.com/johnrichardszpe-dot/planting-survey">GitHub</a></p>';
+      '<p class="small">' + t('method') + '</p></div>' + (window.MoreTools ? MoreTools.html('planting-survey') : '') + '<p class="small center">' + t('version', { v: VERSION }) + ' · <a href="https://github.com/johnrichardszpe-dot/planting-survey">GitHub</a></p>';
   }
 
   // ---------- start ----------

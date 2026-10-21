@@ -76,4 +76,16 @@ Why these choices (from the sources below):
 Plain HTML/CSS/JS, no build step, no libraries. `index.html`, `style.css`, `strings.js` (all text), `logic.js` (maths, CSV — shared with tests), `app.js` (UI, IndexedDB), `sw.js` (offline cache — **bump `CACHE` on every change**), `manifest.webmanifest`, `icons/`. Tests: `node test.js`. Compass maths reused from the sibling app [Tree Gauge](https://github.com/johnrichardszpe-dot/tree-gauge).
 
 ## Licence
-Free to use. No licence file chosen yet — all rights reserved by John Richards until one is added.
+Free to use. ## More free tools by John Richards
+- 🌲 [Tree Gauge](https://johnrichardszpe-dot.github.io/tree-gauge/) — forest basal area with the phone camera (angle-gauge method)
+- 🌱 [Planting Survey](https://johnrichardszpe-dot.github.io/planting-survey/) — seedling survival %, trees per hectare and photo points *(this app)*
+- 🔥 [Fuel Check](https://johnrichardszpe-dot.github.io/fuel-check/) — simple step-by-step bushfire fuel hazard check
+- 🧭 [Forest Explorer](https://johnrichardszpe-dot.github.io/forest-explorer/) — school forest science kit: height, trunk, carbon
+- 🦜 [Habitat Survey](https://johnrichardszpe-dot.github.io/habitat-survey/) — habitat trees, hollows, wildlife sightings and signs
+- 🍎 [Orchard Counter](https://johnrichardszpe-dot.github.io/orchard-counter/) — row-by-row tree counts, gaps, replant list, yield sample
+- 🚧 [Roadside Trees](https://johnrichardszpe-dot.github.io/roadside-trees/) — roadside and powerline tree hazards, trimming and work lists
+- 🌌 [Universe map](https://johnrichardszpe-dot.github.io/universe-map/) — explore John Richards' map of the universe
+
+The same list is in the app (About / More tools screen), from the shared `more-tools.js`.
+
+No licence file chosen yet — all rights reserved by John Richards until one is added.

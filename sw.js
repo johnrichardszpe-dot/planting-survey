@@ -1,6 +1,6 @@
 /* Planting Survey service worker - bump CACHE when any file changes */
-var CACHE = 'planting-survey-v0.1.0';
-var ASSETS = ['./', 'index.html', 'style.css', 'strings.js', 'logic.js', 'app.js', 'manifest.webmanifest',
+var CACHE = 'planting-survey-v0.1.1';
+var ASSETS = ['./', 'index.html', 'style.css', 'strings.js', 'logic.js', 'more-tools.js', 'app.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));
