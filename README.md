@@ -88,4 +88,4 @@ Free to use. ## More free tools by John Richards
 
 The same list is in the app (About / More tools screen), from the shared `more-tools.js`.
 
-No licence file chosen yet — all rights reserved by John Richards until one is added.
+Released under the MIT Licence (see LICENSE). Free for anyone, anywhere, to use, change and share. Copyright (c) 2026 John Richards.
